@@ -19,22 +19,40 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		concatAndWrap: {
-			dist: {
+			umd: {
 				dest: 'ractive-route.js',
 				indent: '\t',
 				src: 'src/*',
-				wrapper: '.wrapper'
+				wrapper: '.wrapper-umd'
+			},
+			esm: {
+				dest: 'ractive-route.mjs',
+				indent: '\t',
+				src: 'src/*',
+				wrapper: '.wrapper-esm'
 			}
 		},
 		uglify: {
-			bundle: {
+			options: {
+				sourceMap: true,
+				output: {
+					comments: /^!/,
+				}
+			},
+			umd: {
 				options: {
-					preserveComments: 'some',
-					sourceMap: true,
-					sourceMapName: 'ractive-route.min.map'
+					sourceMapName: 'ractive-route.min.map',
 				},
 				files: {
 					'ractive-route.min.js': 'ractive-route.js'
+				}
+			},
+			esm: {
+				options: {
+					sourceMapName: 'ractive-route.min.mjs.map',
+				},
+				files: {
+					'ractive-route.min.mjs': 'ractive-route.mjs'
 				}
 			}
 		}

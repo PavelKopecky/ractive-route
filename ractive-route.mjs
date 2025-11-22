@@ -9,17 +9,7 @@
  * Licensed under the MIT license
  * http://www.opensource.org/licenses/MIT
  */
-
-(function (factory) {
-	if (typeof module !== 'undefined' && module.exports) {
-		module.exports = factory(require('ractive'));
-	} else if (typeof define === 'function' && define.amd) {
-		define([ 'ractive' ], factory);
-	} else {
-		factory(window.Ractive);
-	}
-})(function (Ractive) {
-	/**
+/**
 	 * Route
 	 *
 	 * @param {String} pattern
@@ -782,6 +772,4 @@
 	}
 	
 
-	Router.Route = Route;
-	return Ractive.Router = Router;
-});
+export { Route, Router };
