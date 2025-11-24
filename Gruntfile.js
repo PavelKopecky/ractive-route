@@ -40,7 +40,7 @@ module.exports = function(grunt) {
 			},
 			umd: {
 				options: {
-					sourceMapName: 'ractive-route.min.map',
+					sourceMapName: 'ractive-route.js.map',
 				},
 				files: {
 					'ractive-route.min.js': 'ractive-route.js'
@@ -48,7 +48,7 @@ module.exports = function(grunt) {
 			},
 			esm: {
 				options: {
-					sourceMapName: 'ractive-route.min.mjs.map',
+					sourceMapName: 'ractive-route.mjs.map',
 				},
 				files: {
 					'ractive-route.min.mjs': 'ractive-route.mjs'
