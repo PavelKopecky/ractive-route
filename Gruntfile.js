@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 				pkg: grunt.file.readJSON('package.json'),
 				src: files.join('\n\n').replace(/\n/g, '\n' + (this.data.indent || ''))
 			}
-		}));
+		}).replace(/\r/g, ''));
 
 		console.log('File %s created.', this.data.dest);
 	});
@@ -27,7 +27,6 @@ module.exports = function(grunt) {
 			},
 			esm: {
 				dest: 'ractive-route.mjs',
-				indent: '\t',
 				src: 'src/*',
 				wrapper: '.wrapper-esm'
 			}
