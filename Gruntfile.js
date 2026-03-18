@@ -12,29 +12,46 @@ module.exports = function(grunt) {
 				pkg: grunt.file.readJSON('package.json'),
 				src: files.join('\n\n').replace(/\n/g, '\n' + (this.data.indent || ''))
 			}
-		}));
+		}).replace(/\r/g, ''));
 
 		console.log('File %s created.', this.data.dest);
 	});
 
 	grunt.initConfig({
 		concatAndWrap: {
-			dist: {
+			umd: {
 				dest: 'ractive-route.js',
 				indent: '\t',
 				src: 'src/*',
-				wrapper: '.wrapper'
+				wrapper: '.wrapper-umd'
+			},
+			esm: {
+				dest: 'ractive-route.mjs',
+				src: 'src/*',
+				wrapper: '.wrapper-esm'
 			}
 		},
 		uglify: {
-			bundle: {
+			options: {
+				sourceMap: true,
+				output: {
+					comments: /^!/,
+				}
+			},
+			umd: {
 				options: {
-					preserveComments: 'some',
-					sourceMap: true,
-					sourceMapName: 'ractive-route.min.map'
+					sourceMapName: 'ractive-route.js.map',
 				},
 				files: {
 					'ractive-route.min.js': 'ractive-route.js'
+				}
+			},
+			esm: {
+				options: {
+					sourceMapName: 'ractive-route.mjs.map',
+				},
+				files: {
+					'ractive-route.min.mjs': 'ractive-route.mjs'
 				}
 			}
 		}
