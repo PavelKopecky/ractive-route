@@ -84,6 +84,25 @@ describe('utils.js', function () {
 		});
 	});
 
+	describe('createNewPath()', function () {
+		var createNewPath = utils.__get__('createNewPath');
+
+		it('should concatenate basePath, path, qs, and hash correctly', function () {
+			var uri = { path: '/user/profile', qs: '?tab=settings', hash: '#avatar' };
+			expect(createNewPath('/app', uri)).to.equal('/app/user/profile?tab=settings#avatar');
+		});
+
+		it('should handle an empty basePath', function () {
+			var uri = { path: '/login', qs: '', hash: '' };
+			expect(createNewPath('', uri)).to.equal('/login');
+		});
+
+		it('should resolve trailing slashes correctly', function () {
+			var uri = { path: '/files/', qs: '?sort=desc', hash: '' };
+			expect(createNewPath('/data/', uri)).to.equal('/data/files/?sort=desc');
+		});
+	});
+
 	describe('parseHash()', function () {
 		var parseHash = utils.__get__('parseHash');
 

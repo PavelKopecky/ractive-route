@@ -71,6 +71,18 @@ function joinPaths(parts) {
 }
 
 /**
+ * Create new path
+ *
+ * @param {String} basePath
+ * @param {{protocol: string, host: string, path: string, qs: string, hash: string}} uri
+ * @returns {String}
+ * @private
+ */
+function createNewPath(basePath, uri) {
+	return joinPaths(basePath, uri.path) + uri.qs + uri.hash;
+}
+
+/**
  * Parents
  *
  * @param {Element} el

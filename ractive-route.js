@@ -377,7 +377,7 @@
 		var uri = parseUri(request);
 	
 		if (!uri.protocol && !uri.host) {
-			location.pathname = joinPaths(this.basePath, request);
+			location.href = createNewPath(this.basePath, uri);
 		} else {
 			location.href = request;
 		}
@@ -586,6 +586,18 @@
 		return Array.prototype.slice.call(arguments)
 			.join('/')
 			.replace(/\/+/g, '/');
+	}
+	
+	/**
+	 * Create new path
+	 *
+	 * @param {String} basePath
+	 * @param {{protocol: string, host: string, path: string, qs: string, hash: string}} uri
+	 * @returns {String}
+	 * @private
+	 */
+	function createNewPath(basePath, uri) {
+		return joinPaths(basePath, uri.path) + uri.qs + uri.hash;
 	}
 	
 	/**
